@@ -7,5 +7,6 @@ export function getClient(): WsClient<ServiceType> {
         // Remove this to use binary mode (remove from the server too)
         json: true,
         logger: console,
+        logLevel:'warn'
     })
 }
