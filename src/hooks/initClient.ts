@@ -15,9 +15,17 @@ const initClient = async () =>{
     sendToken(client)
     errorHandle(client)
 
-    await client.connect()
+    const res = await client.connect()
+    if(res.isSucc){
+        console.log('connected');
+        store.client = client
+    }
+    else{
+        ElMessage.error('fail to connect to server')
+        throw new Error("fail to connect to server");
+    }
 
-    store.client = client
+    
 }
 
 export {
