@@ -5,15 +5,16 @@ import { defineStore } from "pinia"
 import { getClient } from '@/getClient';
 import { initClient } from '@/hooks/initClient';
 
-export const useClientStore = defineStore('client',{
-    state:()=>{
-        return{
-            client:(()=>{
+export const useClientStore = defineStore('client', {
+    state: () => {
+        return {
+            client: (() => {
                 const client = getClient()
                 initClient(client)
                 return client
             })(),
-            username:""
+            username: "",
+            role: ""
         }
     }
 })

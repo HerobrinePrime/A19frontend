@@ -21,8 +21,8 @@ import { HttpClient, WsClient } from "tsrpc-browser";
 import { storeToRefs } from "pinia";
 
 const clientStore = useClientStore()
-const { username } = storeToRefs(clientStore)
-let client  = clientStore.client as HttpClient<ServiceType>
+const { username, role } = storeToRefs(clientStore)
+let client = clientStore.client as HttpClient<ServiceType>
 // initClient().then(async () => {
 //   const { client } = useClientStore()
 
@@ -37,17 +37,24 @@ let client  = clientStore.client as HttpClient<ServiceType>
 
 onMounted(async () => {
 
-  // const ret = await client.callApi('Login/TestToken',{ })
-  // username.value = ret.res?.username as string
-
-    
-  // const ret1 = await client.callApi('Login/Login', {
-  //   username: 'zireael',
-  //   password: 'herobrine'
+  // const { res } = await client.callApi('Login/TestToken', {})
+  // clientStore.$patch({
+  //   username: res?.username,
+  //   role: res?.role
   // })
-  // ElMessage.success('登录成功')
-  // localStorage.setItem('token', ret1.res?.token || '')
-  // username.value = 'zireael'
+
+
+
+  const { res } = await client.callApi('Login/Login', {
+    username: 'Seydlitz',
+    password: 'sms'
+  })
+  ElMessage.success('登录成功')
+  localStorage.setItem('token', res?.token || '')
+  clientStore.$patch({
+    username: res?.username,
+    role: res?.role
+  })
 
   // const ret2 = await client.callApi('Send', {
   //   content: 'asdfasdf'
