@@ -17,10 +17,12 @@ import { getClient } from "./getClient";
 import { useClientStore } from "./pinia/stores/client";
 import { setLogLevel } from "tsrpc-proto";
 import { ServiceType } from '@/shared/protocols/serviceProto';
-import { WsClient } from "tsrpc-browser";
-// import { ElMessage } from 'element-plus'
+import { HttpClient, WsClient } from "tsrpc-browser";
+import { storeToRefs } from "pinia";
 
-let client: WsClient<ServiceType>;
+const clientStore = useClientStore()
+const { username } = storeToRefs(clientStore)
+let client  = clientStore.client as HttpClient<ServiceType>
 // initClient().then(async () => {
 //   const { client } = useClientStore()
 
@@ -34,28 +36,23 @@ let client: WsClient<ServiceType>;
 // })
 
 onMounted(async () => {
-  try {
-    await initClient()
 
-    client = useClientStore().client as WsClient<ServiceType>
-    const ret = await client.callApi('Login', {
-      username: 'zireael',
-      password: 'herobrine'
-    })
-    ElMessage.success('登录成功')
-    localStorage.setItem('token', ret.res?.token || '')
+  // const ret = await client.callApi('Login/TestToken',{ })
+  // username.value = ret.res?.username as string
 
-  } catch (error) {
-    console.log(error);
-  }
+    
+  // const ret1 = await client.callApi('Login/Login', {
+  //   username: 'zireael',
+  //   password: 'herobrine'
+  // })
+  // ElMessage.success('登录成功')
+  // localStorage.setItem('token', ret1.res?.token || '')
+  // username.value = 'zireael'
 
-
-
-
-  // const ret = await client.callApi('Send', {
+  // const ret2 = await client.callApi('Send', {
   //   content: 'asdfasdf'
   // })
-  // console.log(ret);
+  // console.log(ret2);
 
 })
 
