@@ -1,15 +1,16 @@
 <template>
   <div class="App">
-    <h1>TSRPC Chatroom</h1>
+    <h1>Client</h1>
 
     <div>
-      <!-- <Chatroom title="Client #1" />
-      <Chatroom title="Client #2" /> -->
+      <Login />
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import Login from './components/login.vue';
+
 import { defineComponent, onMounted } from "vue";
 import Chatroom from "./Chatroom.vue";
 import { initClient } from "./hooks/initClient";
