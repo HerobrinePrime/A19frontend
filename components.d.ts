@@ -9,6 +9,10 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Background: typeof import('./src/components/Background.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
+    ElInput: typeof import('element-plus/es')['ElInput']
+    ElLink: typeof import('element-plus/es')['ElLink']
     Login: typeof import('./src/components/login.vue')['default']
+    UploadDemo: typeof import('./src/components/uploadDemo.vue')['default']
   }
 }
