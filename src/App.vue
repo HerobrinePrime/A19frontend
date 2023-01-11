@@ -1,10 +1,9 @@
 <template>
   <div class="App">
-    <h1>Client</h1>
+    
 
     <div>
-      <Login />
-      <UploadDemo />
+      <Login/>
     </div>
   </div>
 </template>
@@ -12,8 +11,9 @@
 <script lang="ts" setup>
 import { onMounted } from "vue";
 import { useClientStore } from "./pinia/stores/client";
+import { setLogLevel } from "tsrpc-proto";
 import { ServiceType } from '@/shared/protocols/serviceProto';
-import { HttpClient } from "tsrpc-browser";
+import { HttpClient, WsClient } from "tsrpc-browser";
 import { storeToRefs } from "pinia";
 
 const clientStore = useClientStore()
@@ -42,9 +42,7 @@ onMounted(async () => {
   //   content: 'asdfasdf'
   // })
   // console.log(ret2);
-
-})
-
+});
 
 // clinet.callApi('Login')
 </script>
@@ -54,5 +52,17 @@ onMounted(async () => {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.App {
+  >h1 {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  >div {
+    display: flex;
+    justify-content: center;
+  }
 }
 </style>
