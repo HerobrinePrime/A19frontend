@@ -16,13 +16,13 @@
       
       <br>
       <div id="login">
-        <el-button type="primary" size="large" @click="login"> 登录</el-button>
+        <el-button type="primary" size="large" @click=""> 登录</el-button>
       </div>
       
       <br>
 
       <div id="customer">
-        <el-link href="#" type="primary">联系客服</el-link>
+        <!-- <el-link href="#" type="primary">联系客服</el-link> -->
       
       </div>
       
@@ -64,18 +64,6 @@ const remember = ref(false)
 const store = useClientStore()
 const client = store.client
 
-const login = async ()=>{
-  const { res } = await client.callApi('Login/Login',{
-    username:'Seydlitz',
-    password:'sms'
-  })
-  ElMessage.success('登录成功')
-  localStorage.setItem('token',res?.token as string)
-  store.$patch({
-    username:res?.username,
-    role:res?.role
-  })
-}
 </script>
 
 <style lang="less" scoped>
