@@ -13,8 +13,15 @@ export const useClientStore = defineStore('client', {
                 initClient(client)
                 return client
             })(),
-            username: "",
-            role: ""
+            currentUser: {} as {
+                role: string,
+                school: string,
+                name: string,
+                portrait: string,
+                email: string,
+                number: string,
+                gender: number
+            }
         }
     }
 })

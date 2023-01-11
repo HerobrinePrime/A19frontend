@@ -4,58 +4,39 @@
 
     <div>
       <Login />
+      <UploadDemo />
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import Login from './components/login.vue';
-
-import { defineComponent, onMounted } from "vue";
-import Chatroom from "./Chatroom.vue";
-import { initClient } from "./hooks/initClient";
-import { getClient } from "./getClient";
+import { onMounted } from "vue";
 import { useClientStore } from "./pinia/stores/client";
-import { setLogLevel } from "tsrpc-proto";
 import { ServiceType } from '@/shared/protocols/serviceProto';
-import { HttpClient, WsClient } from "tsrpc-browser";
+import { HttpClient } from "tsrpc-browser";
 import { storeToRefs } from "pinia";
 
 const clientStore = useClientStore()
-const { username, role } = storeToRefs(clientStore)
+const { currentUser } = storeToRefs(clientStore)
 let client = clientStore.client as HttpClient<ServiceType>
-// initClient().then(async () => {
-//   const { client } = useClientStore()
-
-
-//   const ret = await client.callApi('Login',{
-//     username:'zireael',
-//     password:'herobrine'
-//   })
-//   localStorage.setItem('token',ret.res?.token || '')
-
-// })
 
 onMounted(async () => {
 
-  // const { res } = await client.callApi('Login/TestToken', {})
-  // clientStore.$patch({
-  //   username: res?.username,
-  //   role: res?.role
-  // })
-
-
-
-  const { res } = await client.callApi('Login/Login', {
-    username: 'Seydlitz',
-    password: 'sms'
-  })
-  ElMessage.success('登录成功')
-  localStorage.setItem('token', res?.token || '')
+  const { res } = await client.callApi('Login/TestToken', {})
+  // console.log(res);
   clientStore.$patch({
-    username: res?.username,
-    role: res?.role
+    currentUser: res?.user
   })
+
+  // const ret = await client.callApi('Login/Login', {
+  //   email: 'Seydlitz@asdf.asdf',
+  //   password: 'sms'
+  // })
+  // if (ret.isSucc) {
+  //   ElMessage.success('登录成功')
+  //   localStorage.setItem('token', ret.res.token || '')
+  //   currentUser.value = ret.res.user
+  // }
 
   // const ret2 = await client.callApi('Send', {
   //   content: 'asdfasdf'
@@ -73,17 +54,5 @@ onMounted(async () => {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-.App {
-  >h1 {
-    text-align: center;
-    margin-top: 20px;
-  }
-
-  >div {
-    display: flex;
-    justify-content: center;
-  }
 }
 </style>

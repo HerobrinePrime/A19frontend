@@ -1,9 +1,11 @@
 <template>
-<el-button type="primary">Primary</el-button>
+    <div>
+        <el-button type="primary">Primary</el-button>
+    </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue" 
+import { ref } from "vue"
 
 </script>
 
