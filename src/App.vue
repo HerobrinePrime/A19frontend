@@ -1,15 +1,15 @@
 <template>
   <div class="App">
-    <h1>Client</h1>
+    
 
     <div>
-      <Login />
+      <Login/>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import Login from './components/login.vue';
+import Login from "./components/Login.vue";
 
 import { defineComponent, onMounted } from "vue";
 import Chatroom from "./Chatroom.vue";
@@ -17,16 +17,15 @@ import { initClient } from "./hooks/initClient";
 import { getClient } from "./getClient";
 import { useClientStore } from "./pinia/stores/client";
 import { setLogLevel } from "tsrpc-proto";
-import { ServiceType } from '@/shared/protocols/serviceProto';
+import { ServiceType } from "@/shared/protocols/serviceProto";
 import { HttpClient, WsClient } from "tsrpc-browser";
 import { storeToRefs } from "pinia";
 
-const clientStore = useClientStore()
-const { username, role } = storeToRefs(clientStore)
-let client = clientStore.client as HttpClient<ServiceType>
+const clientStore = useClientStore();
+const { username, role } = storeToRefs(clientStore);
+let client = clientStore.client as HttpClient<ServiceType>;
 // initClient().then(async () => {
 //   const { client } = useClientStore()
-
 
 //   const ret = await client.callApi('Login',{
 //     username:'zireael',
@@ -37,33 +36,28 @@ let client = clientStore.client as HttpClient<ServiceType>
 // })
 
 onMounted(async () => {
-
   // const { res } = await client.callApi('Login/TestToken', {})
   // clientStore.$patch({
   //   username: res?.username,
   //   role: res?.role
   // })
 
-
-
-  const { res } = await client.callApi('Login/Login', {
-    username: 'Seydlitz',
-    password: 'sms'
-  })
-  ElMessage.success('登录成功')
-  localStorage.setItem('token', res?.token || '')
-  clientStore.$patch({
-    username: res?.username,
-    role: res?.role
-  })
+  // const { res } = await client.callApi("Login/Login", {
+  //   username: "Seydlitz",
+  //   password: "sms",
+  // });
+  // ElMessage.success("登录成功");
+  // localStorage.setItem("token", res?.token || "");
+  // clientStore.$patch({
+  //   username: res?.username,
+  //   role: res?.role,
+  // });
 
   // const ret2 = await client.callApi('Send', {
   //   content: 'asdfasdf'
   // })
   // console.log(ret2);
-
-})
-
+});
 
 // clinet.callApi('Login')
 </script>
@@ -76,14 +70,16 @@ onMounted(async () => {
 }
 
 .App {
-  >h1 {
+  > h1 {
     text-align: center;
     margin-top: 20px;
   }
 
-  >div {
+  > div {
     display: flex;
     justify-content: center;
   }
+
+   
 }
 </style>
